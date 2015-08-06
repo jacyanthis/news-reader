@@ -21,6 +21,7 @@ class Feed < ActiveRecord::Base
   end
 
   def reload
+    # debugger
     # reloads entries
     self.touch #this causes the updated_at column to be updated
     begin

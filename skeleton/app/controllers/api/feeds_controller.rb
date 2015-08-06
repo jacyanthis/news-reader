@@ -4,6 +4,7 @@ class Api::FeedsController < ApplicationController
   end
 
   def show
+    # debugger
     render :json => Feed.find(params[:id]), include: :latest_entries
 
   end
