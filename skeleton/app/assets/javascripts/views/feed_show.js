@@ -1,13 +1,28 @@
-NewsReader.Views.FeedShow = Backbone.View.extend({
+NewsReader.Views.FeedShow = Backbone.CompositeView.extend({
   template: JST["feed_show"],
 
   initialize: function () {
     this.listenTo(this.model, "sync", this.render);
+    this.listenTo(this.collection, 'add', this.addEntriesIndexView);
+    this.collection.each(this.addEntriesIndexView.bind(this));
+  },
+
+  addEntriesIndexView: function (entry) {
+  var subview = new NewsReader.Views.EntriesIndexItem({ model: entry });
+  this.addSubview('ul.entries-list', subview);
+},
+
+  renderLoadingScreen: function () {
+    this.$el.append(JST["ball_loader"]());
   },
 
   render: function () {
     this.$el.html(this.template( {feed: this.model }));
-    // debugger
+    if (this.model.fetching) {
+      this.$el.append(JST["ball_loader"]());
+      this.model.fetching = false;
+      return this;
+    }
     this.model.entries().each(function (entry) {
       var entryView = new NewsReader.Views.EntriesIndexItem({ model: entry });
       this.$('ul.entries-list').append(entryView.render().$el);

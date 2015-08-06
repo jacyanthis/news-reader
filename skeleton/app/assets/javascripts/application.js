@@ -14,6 +14,8 @@
 //= require jquery_ujs
 //= require underscore
 //= require backbone
+//= require fetch_event
+//= require_tree ./utils
 //= require news_reader
 //= require_tree ../templates
 //= require_tree ./models
