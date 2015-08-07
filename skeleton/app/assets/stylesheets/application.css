@@ -34,7 +34,7 @@ div#sidebar {
 
 div#content {
   float: left;
-  margin-top: -112px;
+  margin-top: -90px;
   width: 70%;
 }
 
@@ -95,6 +95,9 @@ a:hover {
 }
 
 .label {
+  overflow: hidden;
+  text-align: center;
+  line-height: 30px;
   float: left;
   margin: 0;
   background: rgba(255, 255, 255, 0.7);
